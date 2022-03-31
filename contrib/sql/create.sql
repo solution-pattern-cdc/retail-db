@@ -23,15 +23,6 @@ SET row_security = off;
 -- Name: customer_status; Type: TYPE; Schema: public; Owner: $POSTGRESQL_USER
 --
 
-CREATE TYPE public.customer_status AS ENUM (
-    'silver',
-    'gold',
-    'platinum'
-);
-
-
-ALTER TYPE public.customer_status OWNER TO $POSTGRESQL_USER;
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -46,7 +37,7 @@ CREATE SEQUENCE public.customer_id_seq START WITH 1000;
 CREATE TABLE public.customer (
     customer_id bigint NOT NULL DEFAULT nextval('public.customer_id_seq'),
     name character varying(255) NOT NULL,
-    status public.customer_status NOT NULL
+    status character varying(25) NOT NULL
 );
 
 ALTER TABLE public.customer OWNER TO $POSTGRESQL_USER;
