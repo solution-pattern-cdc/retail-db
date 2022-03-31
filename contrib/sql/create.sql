@@ -41,73 +41,97 @@ SET default_table_access_method = heap;
 -- Name: customer; Type: TABLE; Schema: public; Owner: $POSTGRESQL_USER
 --
 
+CREATE SEQUENCE public.customer_id_seq START WITH 1000;
+
 CREATE TABLE public.customer (
-    customer_id bigint NOT NULL,
+    customer_id bigint NOT NULL DEFAULT nextval('public.customer_id_seq'),
     name character varying(255) NOT NULL,
     status public.customer_status NOT NULL
 );
 
-
 ALTER TABLE public.customer OWNER TO $POSTGRESQL_USER;
+
+ALTER SEQUENCE public.customer_id_seq OWNER TO $POSTGRESQL_USER;
+
+ALTER SEQUENCE public.customer_id_seq OWNED BY public.customer.customer_id;
 
 --
 -- TOC entry 206 (class 1259 OID 16439)
 -- Name: inventory; Type: TABLE; Schema: public; Owner: $POSTGRESQL_USER
 --
+CREATE SEQUENCE public.inventory_id_seq START WITH 1000;
 
 CREATE TABLE public.inventory (
-    inventory_id bigint NOT NULL,
+    inventory_id bigint NOT NULL DEFAULT nextval('public.inventory_id_seq'),
     product_id bigint NOT NULL,
     quantity integer NOT NULL
 );
 
-
 ALTER TABLE public.inventory OWNER TO $POSTGRESQL_USER;
+
+ALTER SEQUENCE public.inventory_id_seq OWNER TO $POSTGRESQL_USER;
+
+ALTER SEQUENCE public.inventory_id_seq OWNED BY public.inventory.inventory_id;
 
 --
 -- TOC entry 204 (class 1259 OID 16416)
 -- Name: line_item; Type: TABLE; Schema: public; Owner: $POSTGRESQL_USER
 --
 
+CREATE SEQUENCE public.line_item_id_seq START WITH 1000;
+
 CREATE TABLE public.line_item (
-    line_item_id bigint NOT NULL,
+    line_item_id bigint NOT NULL DEFAULT nextval('public.line_item_id_seq'),
     sale_id bigint NOT NULL,
     product_id bigint NOT NULL,
     price numeric(8,2) NOT NULL,
     quantity integer NOT NULL
 );
 
-
 ALTER TABLE public.line_item OWNER TO $POSTGRESQL_USER;
+
+ALTER SEQUENCE public.line_item_id_seq OWNER TO $POSTGRESQL_USER;
+
+ALTER SEQUENCE public.line_item_id_seq OWNED BY public.line_item.line_item_id;
 
 --
 -- TOC entry 205 (class 1259 OID 16426)
 -- Name: product; Type: TABLE; Schema: public; Owner: $POSTGRESQL_USER
 --
 
+CREATE SEQUENCE public.product_id_seq START WITH 1000;
+
 CREATE TABLE public.product (
-    product_id bigint NOT NULL,
+    product_id bigint DEFAULT nextval('public.product_id_seq'),
     name character varying(255) NOT NULL,
     description text,
     price numeric(8,2)
 );
 
-
 ALTER TABLE public.product OWNER TO $POSTGRESQL_USER;
+
+ALTER SEQUENCE public.product_id_seq OWNER TO $POSTGRESQL_USER;
+
+ALTER SEQUENCE public.product_id_seq OWNED BY public.product.product_id;
 
 --
 -- TOC entry 203 (class 1259 OID 16406)
 -- Name: sale; Type: TABLE; Schema: public; Owner: $POSTGRESQL_USER
 --
 
+CREATE SEQUENCE public.sale_id_seq START WITH 1000;
+
 CREATE TABLE public.sale (
-    sale_id bigint NOT NULL,
+    sale_id bigint NOT NULL DEFAULT nextval('public.sale_id_seq'),
     customer_id bigint NOT NULL,
     date timestamp without time zone NOT NULL
 );
 
-
 ALTER TABLE public.sale OWNER TO $POSTGRESQL_USER;
+
+ALTER SEQUENCE public.sale_id_seq OWNER TO $POSTGRESQL_USER;
+
+ALTER SEQUENCE public.sale_id_seq OWNED BY public.sale.sale_id;
 
 --
 -- TOC entry 2835 (class 2606 OID 16405)
